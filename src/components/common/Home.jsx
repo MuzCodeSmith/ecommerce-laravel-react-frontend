@@ -2,7 +2,9 @@ import React from 'react'
 
 const Home = () => {
   return (
-    <div>Home Page</div>
+    <div className='shadow'>
+      <button className='btn btn-primary'>Click</button>
+    </div>
   )
 }
 
