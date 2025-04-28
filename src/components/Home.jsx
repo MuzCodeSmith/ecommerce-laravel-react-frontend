@@ -5,6 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Logo from '../assets/images/logo.png';
 import SliderOneImg from '../assets/images/banner-1.jpg';
 import SliderTwoImg from '../assets/images/banner-2.jpg';
+import LogoWhite from '../assets/images/logo-white.png';
 
 // swiper
 // Import Swiper React components
@@ -77,9 +78,64 @@ const Home = () => {
         </Swiper>
       </section>
 
-      <LatestProducts/>
-      <FeaturedProducts/>
+      <LatestProducts />
+      <FeaturedProducts />
+
+      <footer className='py-5 text-white' >
+        <div className="container">
+          <div className="row">
+            <div className="col-md-3">
+              <img src={LogoWhite} alt="logoblack" width={150} />
+              <div className='pt-3 pe-5' >
+                Lorem ipsum vel voluptas aliquam modi quibusdam!
+              </div>
+            </div>
+            <div className="col-md-3">
+              <h3 className='mb3'>Categories</h3>
+              <ul className="col-md-3">
+                <li><a href="">Kids</a></li>
+                <li><a href="">Women</a></li>
+                <li><a href="">Men</a></li>
+              </ul>
+            </div>
+            <div className='col-md-3'>
+              <h3 className='mb3'>Quick Links</h3>
+              <ul className="col-md-3">
+                <li><a href="">Login</a></li>
+                <li><a href="">Register</a></li>
+              </ul>
+            </div>
+            <div className='col-md-3'>
+              <h3 className='mb3'>Get in Touch</h3>
+              <ul className="col-md-3">
+                <li><a href="">+91-95XXXXXXXX</a></li>
+                <li><a href="">info@example.com</a></li>
+              </ul>
+            </div>
+
+          </div>
+          <div className="row">
+            <div className="col-md-4">
+              <div className="d-flex justify-content-center">
+                <h3>Free Delivery</h3>
+              </div>
+            </div>
+            <div className="col-md-4">
+              <div className="d-flex justify-content-center">
+                <h3>Money Back Garuntee</h3>
+              </div>
+            </div>
+            <div className="col-md-4">
+              <div className="d-flex justify-content-center">
+                <h3>Secure Payment</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
     </>
+
+
 
   )
 }

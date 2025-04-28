@@ -156,3 +156,19 @@ header{
     }
     
 }
+
+footer{
+    h2{
+        font-size: 1.2em;
+    }
+    background-color: $tertiary-color;
+    ul{
+        li{
+            margin-bottom: 10px;
+            a{
+                font-size: 1.2em;
+                color: $primary-white;
+            }
+        }
+    }
+}
