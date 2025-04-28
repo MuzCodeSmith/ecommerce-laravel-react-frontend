@@ -96,5 +96,18 @@ ul{
             color: $primary-white;
         }
     }
+
+    header{
+       .navbar-expand-lg{
+        .navbar-nav{
+            .nav-link{
+                padding: 10px 15px;
+                font-size: 1.2em;
+                font-weight: 500;
+                color: $primary-black;
+            }
+        }
+       }
+    }
 }
 
