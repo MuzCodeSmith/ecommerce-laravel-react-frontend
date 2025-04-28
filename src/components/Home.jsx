@@ -13,6 +13,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import LatestProducts from './common/LatestProducts';
+import FeaturedProducts from './common/FeaturedProducts';
 
 
 const Home = () => {
@@ -77,6 +78,7 @@ const Home = () => {
       </section>
 
       <LatestProducts/>
+      <FeaturedProducts/>
     </>
 
   )
