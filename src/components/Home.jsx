@@ -2,9 +2,9 @@ import React from 'react'
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 // images
-import Logo from '../../assets/images/logo.png';
-import SliderOneImg from '../../assets/images/banner-1.jpg';
-import SliderTwoImg from '../../assets/images/banner-2.jpg';
+import Logo from '../assets/images/logo.png';
+import SliderOneImg from '../assets/images/banner-1.jpg';
+import SliderTwoImg from '../assets/images/banner-2.jpg';
 
 // swiper
 // Import Swiper React components
@@ -12,6 +12,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
+import LatestProducts from './common/LatestProducts';
 
 
 const Home = () => {
@@ -74,6 +75,8 @@ const Home = () => {
           </SwiperSlide>
         </Swiper>
       </section>
+
+      <LatestProducts/>
     </>
 
   )
