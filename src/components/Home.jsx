@@ -7,16 +7,17 @@ import FeaturedProducts from './common/FeaturedProducts';
 import Header from './common/Header';
 import Slider from './common/Slider';
 import Footer from './common/Footer';
+import Layout from './common/Layout';
 
 
 const Home = () => {
   return (
     <>
-      <Header/>
-      <Slider/>
-      <LatestProducts />
-      <FeaturedProducts />
-      <Footer />
+      <Layout>
+        <Slider/>
+        <LatestProducts />
+        <FeaturedProducts />
+      </Layout>
     </>
   )
 }
