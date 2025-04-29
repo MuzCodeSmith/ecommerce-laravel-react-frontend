@@ -9,7 +9,7 @@ const FeaturedProducts = () => {
             <div className="container">
                 <h2>Featured Products</h2>
                 <div className="row mt-4">
-                    <div className="col-md-3 ">
+                    <div className="col-md-3 col-6">
                         {/* Product 1 */}
                         <div className="product card border-0">
                             <div className="card-img">
@@ -24,7 +24,7 @@ const FeaturedProducts = () => {
                         </div>
                     </div>
                     {/* Product 2 */}
-                    <div className="col-md-3 ">
+                    <div className="col-md-3 col-6">
                         <div className="product card border-0">
                             <div className="card-img">
                                 <img src={ProductImg2} alt="" className='w-100' />
@@ -38,7 +38,7 @@ const FeaturedProducts = () => {
                         </div>
                     </div>
                     {/* Product 3 */}
-                    <div className="col-md-3 ">
+                    <div className="col-md-3 col-6">
                         <div className="product card border-0">
                             <div className="card-img">
                                 <img src={ProductImg3} alt="" className='w-100' />
@@ -52,7 +52,7 @@ const FeaturedProducts = () => {
                         </div>
                     </div>
                     {/* Product 4 */}
-                    <div className="col-md-3 ">
+                    <div className="col-md-3 col-6">
                         <div className="product card border-0">
                             <div className="card-img">
                                 <img src={ProductImg4} alt="" className='w-100' />

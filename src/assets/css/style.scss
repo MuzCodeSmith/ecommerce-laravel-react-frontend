@@ -149,6 +149,7 @@ header{
         }
         .price{
             font-size: 1.2em;
+            padding-bottom: 20px;
         }
         span{
             color:rgba($color: $primary-black, $alpha: 0.5)
@@ -168,6 +169,23 @@ footer{
             a{
                 font-size: 1.2em;
                 color: $primary-white;
+            }
+        }
+    }
+    .spotlight{
+        border-top: 1px solid rgba($color: $primary-white, $alpha: 0.10);
+        border-bottom: 1px solid rgba($color: $primary-white, $alpha: 0.10);
+    }
+}
+
+
+@media (min-width:200px) and (max-width:768px){
+    .section-1{
+        .swiper{
+            .swiper-wrapper{
+                .swiper-slide{
+                    height: 400px;
+                }
             }
         }
     }
