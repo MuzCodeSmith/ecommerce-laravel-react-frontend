@@ -8,9 +8,8 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 
-import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
-
+import Tabs from 'react-bootstrap/Tabs';
 import { Rating } from 'react-simple-star-rating'
 
 // images
@@ -138,7 +137,7 @@ const Product = () => {
                     <div className="col-md-7">
                         <h2>Dummy Product Title</h2>
                         <div className='d-flex'>
-                            <Rating readonly size={20} initialValue={rating}/>
+                            <Rating readonly size={20} initialValue={rating} />
                             <span className='pt-1 ps-2'>10 Reviews</span>
                         </div>
                         <div className="price h3 py-3">$18 <span className='text-decoration-line-through'>$20</span>
@@ -168,6 +167,24 @@ const Product = () => {
                             <strong>SKU</strong>
                             DDXX2234
                         </div>
+                    </div>
+                </div>
+
+                <div className="row">
+                    <div className="col-md-12">
+                        <Tabs
+                            defaultActiveKey="profile"
+                            id="uncontrolled-tab-example"
+                            className="mb-3"
+                        >
+                            <Tab eventKey="home" title="Description">
+                                Tab content for Description
+                            </Tab>
+                            <Tab eventKey="profile" title="Reviews (10)">
+                                Reviews section
+                            </Tab>
+                            
+                        </Tabs>
                     </div>
                 </div>
             </div>
