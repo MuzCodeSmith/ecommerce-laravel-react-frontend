@@ -187,6 +187,12 @@ footer{
             height: auto !important;
         }
     }
+    .price{
+        font-weight: bold;
+        span{
+            color: rgba($color: $primary-black, $alpha: 0.50);
+        }
+    }
 }
 
 

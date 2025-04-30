@@ -8,6 +8,9 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab';
+
 import { Rating } from 'react-simple-star-rating'
 
 // images
@@ -17,7 +20,7 @@ import ProductImg3 from '../assets/images/Mens/seven.jpg';
 
 const Product = () => {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
-    const [rating, setRating] = useState(0)
+    const [rating, setRating] = useState(4)
 
 
     return (
@@ -35,7 +38,7 @@ const Product = () => {
                     </div>
                 </div>
 
-                <div className="row">
+                <div className="row mb-5">
                     <div className="col-md-5">
                         <div className="row">
 
@@ -133,7 +136,38 @@ const Product = () => {
                         </div>
                     </div>
                     <div className="col-md-7">
+                        <h2>Dummy Product Title</h2>
+                        <div className='d-flex'>
+                            <Rating readonly size={20} initialValue={rating}/>
+                            <span className='pt-1 ps-2'>10 Reviews</span>
+                        </div>
+                        <div className="price h3 py-3">$18 <span className='text-decoration-line-through'>$20</span>
+                        </div>
+                        <div>
+                            100% Original Products  <br />
+                            Pay on Delivery Might be Available <br />
+                            Easy 15 day return and exchange
+                        </div>
+                        <div className='pt-3'>
+                            <strong>Select Sizes</strong>
+                            <div className='sizes pt-2'>
+                                <button className='btn btn-size ms-1'>S</button>
+                                <button className='btn btn-size ms-1'>M</button>
+                                <button className='btn btn-size ms-1'>L</button>
+                                <button className='btn btn-size ms-1'>XL</button>
+                            </div>
+                        </div>
 
+                        <div className='add-to-cart my-4'>
+                            <button className='btn btn-primary text-uppercase'>Add to Cart</button>
+                        </div>
+
+                        <hr />
+
+                        <div>
+                            <strong>SKU</strong>
+                            DDXX2234
+                        </div>
                     </div>
                 </div>
             </div>
