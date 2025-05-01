@@ -6,6 +6,8 @@ import Product from './components/Product'
 import Cart from './components/Cart'
 import Checkout from './components/Checkout'
 import Login from './components/admin/login'
+import { ToastContainer, toast } from 'react-toastify';
+
 
 function App() {
 
@@ -21,6 +23,7 @@ function App() {
           <Route path='/admin/login' element={<Login/>} />
         </Routes>
       </BrowserRouter>
+      <ToastContainer />
     </>
   )
 }
