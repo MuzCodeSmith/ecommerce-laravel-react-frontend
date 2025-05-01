@@ -17,7 +17,7 @@ const Cart = () => {
                         </nav>
                     </div>
                     <div className="col-md-12">
-                        <h2 className='border-bottom pb-3'>Cart1</h2>
+                        <h2 className='border-bottom pb-3'>Cart</h2>
 
                         <table className="table">
                             <tbody>
