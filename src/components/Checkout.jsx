@@ -108,10 +108,10 @@ const Checkout = () => {
                         </div>
 
                         <div>
-                            <input type="radio" onClick={handlePaymentMethod} checked={paymenMethod ==- 'stripe'} value={'stripe'} name="" id="" />
-                            <label htmlFor="" className='form-label ps-2'>Stripe</label>
-                            <input onClick={handlePaymentMethod} type="radio" checked={paymenMethod ==- 'cod'} value={'cod'} name="" id="" className='ms-3' />
-                            <label htmlFor="" className='form-label ps-2'>COD</label>
+                            <input type="radio"  onClick={handlePaymentMethod} checked={paymenMethod === 'stripe'} value={'stripe'} name="" id="stripeRadio" />
+                            <label htmlFor="stripeRadio" className='form-label ps-2'>Stripe</label>
+                            <input onClick={handlePaymentMethod}  type="radio" checked={paymenMethod === 'cod'} value={'cod'} name="" id="codRadio" className='ms-3' />
+                            <label htmlFor="codRadio" className='form-label ps-2'>COD</label>
                         </div>
 
                         <h3 className='border-bottom pt-4 pb-3'><strong>Payment Methods</strong></h3>
