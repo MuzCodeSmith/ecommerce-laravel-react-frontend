@@ -1,17 +1,22 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Layout from '../common/Layout'
 import { useForm } from "react-hook-form"
 import { apiUrl } from '../common/http'
 import { toast } from 'react-toastify'
 
-const Login = () => {
+import { useNavigate } from 'react-router-dom'
+import { AdminAuthContext } from '../context/AdminAuth'
 
+const Login = () => {
+    const {login} = useContext(AdminAuthContext);
     const {
         register,
         handleSubmit,
         watch,
         formState: { errors },
       } = useForm()
+      
+      const navigate = useNavigate();
 
       const onSubmit =async (data) =>{
         // console.log(data)
@@ -24,13 +29,15 @@ const Login = () => {
         }).then(res=>res.json())
         .then(result=>{
             console.log(result)
-            if(result.status == 200){
+            if(result.status == 201){
                 const  adminInfo ={
                     name: result.name,
                     id: result.id,
                     token: result.token,
                 } 
-                localStorage.setItem('adminInfo', JSON.stringify(adminInfo))
+                localStorage.setItem('adminInfo', JSON.stringify(adminInfo));
+                login(adminInfo);
+                navigate('/admin/dashboard');
             }else{
                 toast.error(result.errors)
             }
