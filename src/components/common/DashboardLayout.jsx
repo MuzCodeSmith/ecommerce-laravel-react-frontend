@@ -2,14 +2,14 @@ import React from 'react'
 import Layout from './Layout'
 import { Link } from 'react-router-dom'
 import Sidebar from './Sidebar'
-const DashboardLayout = ({pagetitle,btnLabel,children}) => {
+const DashboardLayout = ({pagetitle,btnLabel,btnLink="", children}) => {
   return (
     <Layout>
     <div className="container">
       <div className="row">
         <div className="d-flex justify-content-between mt-5 pb-3">
           <h4 className='h4 pb-0 mb-0'>{pagetitle}</h4>
-          <Link className='btn btn-primary' href="">{btnLabel}</Link>
+          <Link className='btn btn-primary' to={btnLink} >{btnLabel}</Link>
         </div>
         <div className="col-md-3">
           <Sidebar />

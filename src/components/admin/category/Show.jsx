@@ -41,7 +41,7 @@ const Show = () => {
       fetchCategories();
     }, [])
   return (
-    <DashboardLayout pagetitle={'Category'} btnLabel={'Create'}>
+    <DashboardLayout  pagetitle={'Category'} btnLabel={'Create'} btnLink={'/admin/categories/create'} >
 
       {
         loader && <Loader/>
