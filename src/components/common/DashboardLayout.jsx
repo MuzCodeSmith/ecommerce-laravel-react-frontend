@@ -16,7 +16,7 @@ const DashboardLayout = ({pagetitle,btnLabel,children}) => {
         </div>
         <div className="col-md-9">
           <div className="card shadow">
-            <div className="card-body p4">
+            <div className="card-body p-4">
                 {children}
             </div>
           </div>
