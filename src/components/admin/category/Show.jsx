@@ -42,6 +42,7 @@ const Show = () => {
       }
     }).then(res => res.json())
       .then(result => {
+        toast.success(result.message)
         fetchCategories();
       })
   }
