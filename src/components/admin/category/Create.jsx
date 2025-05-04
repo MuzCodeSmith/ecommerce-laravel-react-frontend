@@ -72,7 +72,7 @@ const Create = () => {
             errors.status && <p className='invalid-feedback'>{errors.status?.message}</p>
           }
         </div>
-        ,<button disabled={disable} type='submit' className='btn btn-primary'>Submit</button>
+        <button disabled={disable} type='submit' className='btn btn-primary'>Submit</button>
       </form>
     </DashboardLayout>
   )
