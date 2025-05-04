@@ -1,6 +1,6 @@
 import React from 'react'
 import Layout from './common/Layout'
-import ProductImg1 from '../assets/images/Mens/eight.jpg';
+import ProductImg1 from '../assets/images/Mens/two.jpg';
 import { Link } from 'react-router-dom';
 
 const Shop = () => {

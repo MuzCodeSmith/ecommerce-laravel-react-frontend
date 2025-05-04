@@ -1,6 +1,6 @@
 import React from 'react'
 import Layout from './common/Layout'
-import ProductImg from '../assets/images/Mens/eight.jpg';
+import ProductImg from '../assets/images/Mens/two.jpg';
 import { Link } from 'react-router-dom';
 
 const Cart = () => {

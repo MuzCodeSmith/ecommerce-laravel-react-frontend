@@ -1,6 +1,6 @@
 import React from 'react'
-import ProductImg1 from '../../assets/images/Mens/eight.jpg';
-import ProductImg2 from '../../assets/images/Mens/seven.jpg';
+import ProductImg1 from '../../assets/images/Mens/two.jpg';
+import ProductImg2 from '../../assets/images/Mens/three.jpg';
 import ProductImg3 from '../../assets/images/Mens/six.jpg';
 import ProductImg4 from '../../assets/images/Mens/fivee.jpg';
 const LatestProducts = () => {

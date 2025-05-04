@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Layout from './common/Layout'
 import { Link } from 'react-router-dom'
-import ProductImg from '../assets/images/Mens/eight.jpg';
+import ProductImg from '../assets/images/Mens/three.jpg';
 
 
 const Checkout = () => {
