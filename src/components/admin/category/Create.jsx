@@ -5,7 +5,6 @@ import { adminToken, apiUrl } from '../../common/http'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 
-
 const Create = () => {
 
   const [disable,setDisable]=useState(false);

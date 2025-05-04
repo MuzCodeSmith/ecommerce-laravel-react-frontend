@@ -19,7 +19,6 @@ const Login = () => {
       const navigate = useNavigate();
 
       const onSubmit =async (data) =>{
-        // console.log(data)
         const res = await fetch(`${apiUrl}/admin/login`,{
             method:'POST',
             headers:{
@@ -28,7 +27,6 @@ const Login = () => {
             body:JSON.stringify(data)
         }).then(res=>res.json())
         .then(result=>{
-            console.log(result)
             if(result.status == 201){
                 const  adminInfo ={
                     name: result.name,
