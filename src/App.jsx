@@ -13,6 +13,7 @@ import {default as ShowCategory } from './components/admin/category/Show';
 import {default as CreateCategory} from './components/admin/category/Create';
 import {default as EditCategory} from './components/admin/category/Edit'
 import {default as ShowBrands} from './components/admin/brands/Show'
+import {default as CreateBrand} from './components/admin/brands/Create'
 
 function App() {
 
@@ -49,6 +50,11 @@ function App() {
           <Route path='/admin/brands' element={
             <AdminRequireAuth>
               <ShowBrands/>
+            </AdminRequireAuth>
+          } ></Route>
+          <Route path='/admin/brands/create' element={
+            <AdminRequireAuth>
+              <CreateBrand/>
             </AdminRequireAuth>
           } ></Route>
         </Routes>
