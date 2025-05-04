@@ -9,13 +9,13 @@ const Sidebar = () => {
               <div className="card-body p-4">
                 <ul>
                   <li>
-                    <Link to="/admin/admin">Dashboard</Link>
+                    <Link to="/admin/dashboard">Dashboard</Link>
                   </li>
                   <li>
                     <Link to="/admin/categories">Categories</Link>
                   </li>
                   <li>
-                    <a href="">Brands</a>
+                    <a href="/admin/brands">Brands</a>
                   </li>
                   <li>
                     <a href="">Products</a>
