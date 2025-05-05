@@ -1,8 +1,11 @@
 import React from 'react'
+import DashboardLayout from '../../common/DashboardLayout'
 
 const Create = () => {
   return (
-    <div>Create</div>
+    <DashboardLayout pagetitle='Create Product' btnLabel='Back' btnLink='/admin/products'>
+      
+    </DashboardLayout>
   )
 }
 
