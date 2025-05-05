@@ -114,7 +114,13 @@ const Create = ({ placeholder }) => {
           <div className="col-md-6">
             <div className="mb-3">
               <label className='form-label' htmlFor="">Category</label>
-              <select className='form-control'>
+              <select
+                {
+                ...register("category", {
+                  required: "the category field is required."
+                })
+                }
+                className={`form-control ${errors.category && 'is-invalid'}`}>
                 <option value="">Select Category</option>
                 {
                   categories && categories.map(category => {
@@ -124,12 +130,16 @@ const Create = ({ placeholder }) => {
                   })
                 }
               </select>
+              {
+                errors.category && <p className='invalid-feedback'>{errors.category?.message}</p>
+              }
             </div>
           </div>
           <div className="col-md-6">
             <div className="mb-3">
               <label className='form-label' htmlFor="">Brand</label>
-              <select className='form-control'>
+              <select
+                className="form-control">
                 <option value="">Select Brand</option>
                 {
                   brands && brands.map(brand => {
@@ -141,11 +151,6 @@ const Create = ({ placeholder }) => {
               </select>
             </div>
           </div>
-        </div>
-
-        <div className="mb-3">
-          <label htmlFor="" className="form-label">Short Description</label>
-          <textarea className='form-control' placeholder="short description" rows={3}></textarea>
         </div>
 
         <div className="mb-3">
@@ -161,22 +166,119 @@ const Create = ({ placeholder }) => {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="" className="form-label">Status</label>
-          <select
-            {...register("status", {
-              validate: value => value !== "" || "the status field is required."
-            })}
-            className={`form-control ${errors.status && 'is-invalid'}`}
-          >
-            <option value="">---- select status ----</option>
-            <option value="1">Active</option>
-            <option value="0">Inactive</option>
-          </select>
-
-          {
-            errors.status && <p className='invalid-feedback'>{errors.status?.message}</p>
-          }
+          <label htmlFor="" className="form-label">Short Description</label>
+          <textarea className='form-control' placeholder="short description" rows={3}></textarea>
         </div>
+
+        <h3 className="py-3 mb-3 border-bottom">Pricing</h3>
+
+        <div className="row">
+          <div className="col-md-6">
+            <div className="mb-3">
+              <label className='form-label' htmlFor="">Price</label>
+              <input
+              {
+                ...register("price", {
+                  required: "the price field is required."
+                })
+                }
+               type="text" placeholder='price' className={`form-control ${errors.price && 'is-invalid'}`} />
+            </div>
+            {
+                errors.price && <p className='invalid-feedback'>{errors.price?.message}</p>
+              }
+          </div>
+          <div className="col-md-6">
+            <div className="mb-3">
+              <label className='form-label' htmlFor="">Discounted Price</label>
+              <input type="text" placeholder='discounted price' className='form-control' />
+            </div>
+          </div>
+        </div>
+
+        <h3 className="py-3 mb-3 border-bottom">Inventory</h3>
+
+        <div className="row">
+          <div className="col-md-6">
+            <div className="mb-3">
+              <label className='form-label' htmlFor="">SKU</label>
+              <input
+              {
+                ...register("sku", {
+                  required: "the sku field is required."
+                })
+                }
+              type="text" placeholder='sku' className={`form-control ${errors.sku && 'is-invalid'}`} />
+            </div>
+            {
+                errors.sku && <p className='invalid-feedback'>{errors.sku?.message}</p>
+              }
+          </div>
+          <div className="col-md-6">
+            <div className="mb-3">
+              <label className='form-label' htmlFor="">Barcode</label>
+              <input type="text" placeholder='barcode' className='form-control' />
+            </div>
+          </div>
+        </div>
+
+
+
+        <div className="row">
+          <div className="col-md-6">
+            <div className="mb-3">
+              <label className='form-label' htmlFor="">Qty</label>
+              <input type="text" placeholder='qty' className='form-control' />
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="mb-3">
+              <label htmlFor="" className="form-label">Status</label>
+              <select
+                {...register("status", {
+                  validate: value => value !== "" || "the status field is required."
+                })}
+                className={`form-control ${errors.status && 'is-invalid'}`}
+              >
+                <option value="">---- select status ----</option>
+                <option value="1">Active</option>
+                <option value="0">Inactive</option>
+              </select>
+
+              {
+                errors.status && <p className='invalid-feedback'>{errors.status?.message}</p>
+              }
+            </div>
+          </div>
+        </div>
+
+        <div className="mb-3">
+              <label htmlFor="" className="form-label">Featured</label>
+              <select
+                {...register("is_featured", {
+                  validate: value => value !== "" || "the Featured field is required."
+                })}
+                className={`form-control ${errors.is_featured && 'is-invalid'}`}
+              >
+                <option value="">---- select status ----</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+              </select>
+
+              {
+                errors.is_featured && <p className='invalid-feedback'>{errors.is_featured?.message}</p>
+              }
+            </div>
+
+        <h3 className="py-3 mb-3 border-bottom">Gallary</h3>
+
+        <div className="mb-3">
+          <label className='form-label' htmlFor="">Image</label>
+          <input type="file" placeholder='image' className='form-control' />
+        </div>
+
+
+
         <button disabled={disable} type='submit' className='btn btn-primary'>Submit</button>
       </form>
     </DashboardLayout>
