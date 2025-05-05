@@ -15,10 +15,10 @@ const Sidebar = () => {
                     <Link to="/admin/categories">Categories</Link>
                   </li>
                   <li>
-                    <a href="/admin/brands">Brands</a>
+                    <Link to="/admin/brands">Brands</Link>
                   </li>
                   <li>
-                    <a href="">Products</a>
+                    <Link to="/admin/brands">Products</Link>
                   </li>
                   <li>
                     <a href="">Orders</a>
