@@ -12,9 +12,12 @@ import {AdminRequireAuth } from './components/admin/AdminRequireAuth';
 import {default as ShowCategory } from './components/admin/category/Show';
 import {default as CreateCategory} from './components/admin/category/Create';
 import {default as EditCategory} from './components/admin/category/Edit'
-import {default as ShowBrands} from './components/admin/brands/Show'
-import {default as CreateBrand} from './components/admin/brands/Create'
-import {default as EditBrand} from './components/admin/brands/Edit'
+import {default as ShowBrands} from './components/admin/brands/Show';
+import {default as CreateBrand} from './components/admin/brands/Create';
+import {default as EditBrand} from './components/admin/brands/Edit';
+import {default as ShowProduts} from './components/admin/products/Show';
+import {default as EditProdut} from './components/admin/products/Edit';
+import {default as CreateProdut} from './components/admin/products/Create';
 
 function App() {
 
@@ -61,6 +64,22 @@ function App() {
           <Route path='/admin/brands/edit/:id' element={
             <AdminRequireAuth>
               <EditBrand/>
+            </AdminRequireAuth>
+          } ></Route>
+
+          <Route path='/admin/products' element={
+            <AdminRequireAuth>
+              <ShowProduts/>
+            </AdminRequireAuth>
+          } ></Route>
+          <Route path='/admin/products/create' element={
+            <AdminRequireAuth>
+              <CreateProdut/>
+            </AdminRequireAuth>
+          } ></Route>
+          <Route path='/admin/products/edit/:id' element={
+            <AdminRequireAuth>
+              <EditProdut/>
             </AdminRequireAuth>
           } ></Route>
         </Routes>
