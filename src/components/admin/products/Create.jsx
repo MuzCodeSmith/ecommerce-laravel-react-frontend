@@ -1,15 +1,26 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useRef, useMemo, useEffect } from 'react';
 import DashboardLayout from '../../common/DashboardLayout'
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { adminToken, apiUrl } from '../../common/http';
+import JoditEditor from 'jodit-react';
 
-const Create = () => {
+const Create = ({ placeholder }) => {
 
+  const editor = useRef(null);
+  const [content, setContent] = useState('');
   const [brands, setBrands] = useState([]);
   const [categories, setCategories] = useState([]);
   const [disable, setDisable] = useState(false);
   const naviagate = useNavigate();
+
+  const config = useMemo(() => ({
+    readonly: false, // all options from https://xdsoft.net/jodit/docs/,
+    placeholder: placeholder || ''
+  }),
+    [placeholder]
+  );
+
 
   const {
     register,
@@ -18,7 +29,7 @@ const Create = () => {
     formState: { errors },
   } = useForm()
 
-  const fetchBrands = async() =>{
+  const fetchBrands = async () => {
     let res = await fetch(`${apiUrl}/brands`, {
       method: 'GET',
       headers: {
@@ -35,8 +46,8 @@ const Create = () => {
           console.log("something went wrong")
         }
       })
-  } 
-  const fetchCategories = async() =>{
+  }
+  const fetchCategories = async () => {
     let res = await fetch(`${apiUrl}/categories`, {
       method: 'GET',
       headers: {
@@ -53,12 +64,12 @@ const Create = () => {
           console.log("something went wrong")
         }
       })
-  } 
+  }
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchBrands();
     fetchCategories();
-  },[])
+  }, [])
 
   const onSaveProduct = async (data) => {
     setDisable(true);
@@ -110,7 +121,7 @@ const Create = () => {
                     return (
                       <option key={`category-${category.id}`} value={category.id}>{category.name}</option>
                     )
-                  })  
+                  })
                 }
               </select>
             </div>
@@ -125,7 +136,7 @@ const Create = () => {
                     return (
                       <option key={`brand-${brand.id}`} value={brand.id}>{brand.name}</option>
                     )
-                  })  
+                  })
                 }
               </select>
             </div>
@@ -135,6 +146,18 @@ const Create = () => {
         <div className="mb-3">
           <label htmlFor="" className="form-label">Short Description</label>
           <textarea className='form-control' placeholder="short description" rows={3}></textarea>
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="" className="form-label">Description</label>
+          <JoditEditor
+            ref={editor}
+            value={content}
+            config={config}
+            tabIndex={1} // tabIndex of textarea
+            onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
+            onChange={newContent => { }}
+          />
         </div>
 
         <div className="mb-3">
