@@ -11,6 +11,8 @@ const Create = ({ placeholder }) => {
   const editor = useRef(null);
   const [content, setContent] = useState('');
   const [brands, setBrands] = useState([]);
+  const [gallery, setGallery] = useState([]);
+  const [galleryImages, setGalleryImages] = useState([]);
   const [categories, setCategories] = useState([]);
   const [disable, setDisable] = useState(false);
   const navigate = useNavigate();
@@ -43,7 +45,6 @@ const Create = ({ placeholder }) => {
       .then(result => {
         if (result.status == 200) {
           setBrands(result.data)
-          console.log(brands)
         } else {
           console.log("something went wrong")
         }
@@ -61,7 +62,6 @@ const Create = ({ placeholder }) => {
       .then(result => {
         if (result.status == 200) {
           setCategories(result.data)
-          console.log(categories)
         } else {
           console.log("something went wrong")
         }
@@ -73,10 +73,32 @@ const Create = ({ placeholder }) => {
     fetchCategories();
   }, [])
 
+  const handleFileUplaod = async (e) =>{
+    const formData = new FormData();
+    const files = e.target.files[0];
+    formData.append('image',files)
+    setDisable(true);
+    let res = await fetch(`${apiUrl}/temp-images`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${adminToken()}`
+      },
+      body:formData,
+    }).then(response => response.json())
+      .then(result => {
+      setDisable(false);
+        if (result.status == 200) {
+          gallery.push(result.data.id);
+          setGallery(gallery)
+        } else {
+          console.log("something went wrong")
+        }
+      })
+  }
+
   const onSaveProduct = async (data) => {
-
-    let formData = {...data,'description':content}
-
+    const formData = {...data,'description':content,'gallery':gallery}
     setDisable(true);
     let res = await fetch(`${apiUrl}/products`, {
       method: 'POST',
@@ -306,7 +328,7 @@ const Create = ({ placeholder }) => {
 
         <div className="mb-3">
           <label className='form-label' htmlFor="">Image</label>
-          <input type="file" placeholder='image' className='form-control' />
+          <input onChange={handleFileUplaod} type="file" placeholder='image' className='form-control' />
         </div>
 
 
