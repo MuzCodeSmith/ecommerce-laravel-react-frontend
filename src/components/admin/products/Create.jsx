@@ -91,6 +91,10 @@ const Create = ({ placeholder }) => {
         if (result.status == 200) {
           gallery.push(result.data.id);
           setGallery(gallery)
+
+          galleryImages.push(result.data.image_url);
+          setGalleryImages(galleryImages);
+          e.target.value = null;
         } else {
           console.log("something went wrong")
         }
@@ -121,6 +125,11 @@ const Create = ({ placeholder }) => {
           })
         }
       })
+  }
+
+  const deleteImage = (image) =>{
+    let filteredGallery = galleryImages.filter(img=> img !=image);
+    setGalleryImages(filteredGallery);
   }
 
   return (
@@ -329,6 +338,23 @@ const Create = ({ placeholder }) => {
         <div className="mb-3">
           <label className='form-label' htmlFor="">Image</label>
           <input onChange={handleFileUplaod} type="file" placeholder='image' className='form-control' />
+        </div>
+
+        <div className="mb-3">
+          <div className="row">
+            {
+              galleryImages && galleryImages.map((image,index)=>{
+                return(
+                  <div className="col-md-3" key={`image-${index}`} >
+                    <div className="card shadow">
+                      <img src={image} alt="" className='w-100' />
+                      <button className='btn btn-primary' onClick={()=>deleteImage(image)} >Delete</button>
+                    </div>
+                  </div>
+                )
+              })
+            }
+          </div>
         </div>
 
 
