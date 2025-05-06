@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { adminToken, apiUrl } from '../../common/http';
 import JoditEditor from 'jodit-react';
+import { toast } from 'react-toastify';
 
 const Create = ({ placeholder }) => {
 
@@ -74,7 +75,7 @@ const Create = ({ placeholder }) => {
 
   const onSaveProduct = async (data) => {
 
-    const formData = {...data,'description':content}
+    let formData = {...data,'description':content}
 
     setDisable(true);
     let res = await fetch(`${apiUrl}/products`, {
