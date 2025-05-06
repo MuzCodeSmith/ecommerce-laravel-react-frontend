@@ -9,7 +9,7 @@ const Edit = () => {
 
   const [disable, setDisable] = useState(false);
   const [category,setCategory] = useState([]);
-  const naviagate = useNavigate();
+  const navigate = useNavigate();
   const params = useParams();
 
   const {
@@ -58,7 +58,7 @@ const Edit = () => {
         setDisable(false)
         if (result.status == 200) {
           toast.success(result.message);
-          naviagate('/admin/categories')
+          navigate('/admin/categories')
         } else {
           console.log("something went wrong")
         }

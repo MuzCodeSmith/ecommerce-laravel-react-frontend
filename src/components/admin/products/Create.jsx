@@ -12,7 +12,7 @@ const Create = ({ placeholder }) => {
   const [brands, setBrands] = useState([]);
   const [categories, setCategories] = useState([]);
   const [disable, setDisable] = useState(false);
-  const naviagate = useNavigate();
+  const navigate = useNavigate();
 
   const config = useMemo(() => ({
     readonly: false, // all options from https://xdsoft.net/jodit/docs/,
@@ -90,7 +90,7 @@ const Create = ({ placeholder }) => {
         setDisable(false)
         if (result.status == 200) {
           toast.success(result.message);
-          naviagate('/admin/products')
+          navigate('/admin/products')
         } else {
           const formErrors = result.errors;
           Object.keys(formErrors).forEach((field)=>{

@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 const Create = () => {
 
   const [disable,setDisable]=useState(false);
-  const naviagate = useNavigate();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -32,7 +32,7 @@ const Create = () => {
       setDisable(false)
       if(result.status == 200){
         toast.success(result.message);
-        naviagate('/admin/categories')
+        navigate('/admin/categories')
       }else{
         console.log("something went wrong")
       }
