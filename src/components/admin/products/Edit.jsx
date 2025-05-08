@@ -175,11 +175,11 @@ const Edit = ({ placeholder }) => {
       })
   }
 
-  const onSaveProduct = async (data) => {
-    const formData = { ...data, 'description': content, 'gallery': gallery }
+  const onUpdateProduct = async (data) => {
+    const formData = { ...data, 'description': content}
     setDisable(true);
-    let res = await fetch(`${apiUrl}/products`, {
-      method: 'POST',
+    let res = await fetch(`${apiUrl}/products/${params.id}`, {
+      method: 'PUT',
       headers: {
         'Content-type': 'application/json',
         'Accept': 'application/json',
@@ -203,13 +203,13 @@ const Edit = ({ placeholder }) => {
 
   const deleteImage = (image) => {
     let filteredGallery = galleryImages.filter(img => img != image);
-    setGalleryImages(filteredGallery);
+    setProductImages(filteredGallery);
   }
 
 
   return (
     <DashboardLayout pagetitle='Edit Product' btnLabel='Back' btnLink='/admin/products'>
-      <form onSubmit={handleSubmit(onSaveProduct)} >
+      <form onSubmit={handleSubmit(onUpdateProduct)} >
         <div className="mb-3">
           <label htmlFor="" className="form-label">Title</label>
           <input
@@ -454,7 +454,7 @@ const Edit = ({ placeholder }) => {
             }
           </div>
         </div>
-        <button disabled={disable} type='submit' className='btn btn-primary'>Submit</button>
+        <button disabled={disable} type='submit' className='btn btn-primary'>Update</button>
       </form>
     </DashboardLayout>
   )
