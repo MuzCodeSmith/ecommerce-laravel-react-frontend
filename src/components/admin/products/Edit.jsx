@@ -12,6 +12,7 @@ const Edit = ({ placeholder }) => {
   const editor = useRef(null);
   const [content, setContent] = useState('');
   const [brands, setBrands] = useState([]);
+  const [sizes, setSizes] = useState([]);
   const [gallery, setGallery] = useState([]);
   const [galleryImages, setGalleryImages] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -45,7 +46,6 @@ const Edit = ({ placeholder }) => {
         }
       }).then(response => response.json())
         .then(result => {
-          console.log(result)
           if (result.status == 200) {
             setContent(result.data.description)
             setProductImages(result.data.product_images)
@@ -86,6 +86,24 @@ const Edit = ({ placeholder }) => {
         }
       })
   }
+  const fetchSizes = async () => {
+    let res = await fetch(`${apiUrl}/sizes`, {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${adminToken()}`
+      },
+    }).then(response => response.json())
+      .then(result => {
+        console.log(result)
+        if (result.status == 200) {
+          setSizes(result.data)
+        } else {
+          console.log("something went wrong")
+        }
+      })
+  }
   const fetchCategories = async () => {
     let res = await fetch(`${apiUrl}/categories`, {
       method: 'GET',
@@ -107,9 +125,10 @@ const Edit = ({ placeholder }) => {
   useEffect(() => {
     fetchBrands();
     fetchCategories();
+    fetchSizes();
   }, [])
 
-  const updateDefaultImage = async(image)=>{
+  const updateDefaultImage = async (image) => {
 
     let res = await fetch(`${apiUrl}/change-product-default-image?product_id=${params.id}&image=${image}`, {
       method: 'GET',
@@ -387,6 +406,28 @@ const Edit = ({ placeholder }) => {
           {
             errors.is_featured && <p className='invalid-feedback'>{errors.is_featured?.message}</p>
           }
+        </div>
+        <div className="mb-3">
+        <label htmlFor="" className="form-label">Sizes</label>
+          {
+            sizes && sizes.map(size => {
+              return (
+                <div class="form-check-inline ps-3" key={`size-${size.id}`}>
+                  <input
+                  {
+                    ...register('sizes')
+                  }
+                  class="form-check-input" type="checkbox" value={size.id} id={`size-${size.id}`}/>
+                    <label class="form-check-label ps-2" htmlFor={`size-${size.id}`}>
+                      {size.name}
+                    </label>
+                </div>
+              )
+
+            }
+            )
+          }
+
         </div>
 
         <h3 className="py-3 mb-3 border-bottom">Gallary</h3>
