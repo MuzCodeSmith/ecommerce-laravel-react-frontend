@@ -15,6 +15,7 @@ const Edit = ({ placeholder }) => {
   const [sizes, setSizes] = useState([]);
   const [gallery, setGallery] = useState([]);
   const [galleryImages, setGalleryImages] = useState([]);
+  const [checkedSizes, setCheckedSizes] = useState([]);
   const [categories, setCategories] = useState([]);
   const [disable, setDisable] = useState(false);
   const [productImages, setProductImages] = useState([]);
@@ -48,6 +49,7 @@ const Edit = ({ placeholder }) => {
         .then(result => {
           if (result.status == 200) {
             setContent(result.data.description)
+            setCheckedSizes(result.productSizes)
             setProductImages(result.data.product_images)
             reset({
               barcode: result.data.barcode,
@@ -417,7 +419,16 @@ const Edit = ({ placeholder }) => {
                   {
                     ...register('sizes')
                   }
-                  class="form-check-input" type="checkbox" value={size.id} id={`size-${size.id}`}/>
+                  class="form-check-input" type="checkbox"
+                  checked={checkedSizes.includes(size.id)}
+                  onChange={(e)=>{
+                    if(e.target.checked){
+                      setCheckedSizes([...checkedSizes,size.id])
+                    }else{
+                      setCheckedSizes(checkedSizes.filter(sid => sid !== size.id ))
+                    }
+                  }}
+                  value={size.id} id={`size-${size.id}`}/>
                     <label class="form-check-label ps-2" htmlFor={`size-${size.id}`}>
                       {size.name}
                     </label>
