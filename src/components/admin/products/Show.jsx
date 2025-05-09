@@ -4,6 +4,7 @@ import { adminToken, apiUrl } from '../../common/http';
 import NoState from '../../common/NoState';
 import Loader from '../../common/Loader';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Show = () => {
   const [products, setProducts] = useState([]);
@@ -23,6 +24,27 @@ const Show = () => {
           setProducts(result.data);
           setLoader(false);
         } else {
+          console.log("something went wrong")
+        }
+      })
+  }
+
+  const onDeleteProduct = async(id) =>{
+    let res = await fetch(`${apiUrl}/products/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${adminToken()}`,
+      }
+    }).then(res => res.json())
+      .then(result => {
+        if (result.status == 200) {
+         const filteredProducts = products.filter(prd=>prd.id != id);
+         setProducts(filteredProducts);
+         toast.success(result.message)
+        } else {
+          toast.error(result.message)
           console.log("something went wrong")
         }
       })
