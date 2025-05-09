@@ -203,9 +203,25 @@ const Edit = ({ placeholder }) => {
       })
   }
 
-  const deleteImage = (image) => {
-    let filteredGallery = galleryImages.filter(img => img != image);
-    setProductImages(filteredGallery);
+  const deleteImage = async(id) => {
+    let res = await fetch(`${apiUrl}/delete-product-image/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${adminToken()}`
+      },
+    }).then(response => response.json())
+      .then(result => {
+        setDisable(false)
+        if (result.status == 200) {
+          toast.success(result.message);
+          let filteredGallery = productImages.filter(img=> img !=id);
+          setProductImages(filteredGallery);
+        } else {
+          toast.success(result.message);
+        }
+      })
   }
 
 
@@ -457,7 +473,7 @@ const Edit = ({ placeholder }) => {
                     <div className="card shadow">
                       <img src={productImage.image_url} alt="" className='w-100' />
                     </div>
-                    <button type="button" className='btn btn-danger mt-3 w-100' onClick={() => deleteImage(productImage.image_url)} >Delete</button>
+                    <button type="button" className='btn btn-danger mt-3 w-100' onClick={() => deleteImage(productImage.id)} >Delete</button>
                     <button type="button" className='btn btn-secondary mt-3 w-100' onClick={() => updateDefaultImage(productImage.image)} >Make Default Image</button>
                   </div>
                 )
