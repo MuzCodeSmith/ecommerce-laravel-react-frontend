@@ -154,9 +154,9 @@ const Shop = () => {
                   {
                     brands && brands.map(brand => {
                       return (
-                        <li className='mb-2' key={`cat-${brand.id}`}>
-                          <input checked={searchParams.get('brand') ? searchParams.get('brand').includes(brand.id):false} onChange={handleBrand} type="checkbox" id={`cat-${brand.id}`} value={brand.id} />
-                          <label htmlFor={`cat-${brand.id}`} className='ps-2'>{brand.name}</label>
+                        <li className='mb-2' key={`brand-${brand.id}`}>
+                          <input checked={searchParams.get('brand') ? searchParams.get('brand').includes(brand.id):false} onChange={handleBrand} type="checkbox" id={`brand-${brand.id}`} value={brand.id} />
+                          <label htmlFor={`brand-${brand.id}`} className='ps-2'>{brand.name}</label>
                         </li>
                       )
                     })
@@ -173,7 +173,7 @@ const Shop = () => {
               {
                 products.length>0 && products.map(product => {
                   return (
-                    <div className="col-md-4 col-6">
+                    <div key={`prod-${product.id}`} className="col-md-4 col-6">
                       <div className="product card border-0">
                         <div className="card-img">
                           {
