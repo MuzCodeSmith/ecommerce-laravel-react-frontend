@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Layout from './common/Layout'
 import ProductImg1 from '../assets/images/Mens/two.jpg';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { apiUrl } from './common/http';
 
 const Shop = () => {
@@ -9,8 +9,15 @@ const Shop = () => {
   const [categories, setCategories] = useState([])
   const [brands, setBrands] = useState([])
   const [products, setProducts] = useState([])
-  const [catChecked, setCatChecked] = useState([]);
-  const [brandChecked, setBrandCatChecked] = useState([]);
+  const [searchParams,setSearchParams] = useSearchParams();
+  const [catChecked, setCatChecked] = useState(()=>{
+    const category = searchParams.get('category');
+    return category ? category.split(','):[];
+  });
+  const [brandChecked, setBrandCatChecked] = useState(()=>{
+    const brand = searchParams.get('brand');
+    return brand ? brand.split(','):[];
+  });
 
 
   const handleCategory = (e) =>{
@@ -60,7 +67,6 @@ const Shop = () => {
   }
 
   const fetchProducts = async () => {
-    console.log(brandChecked)
     let search = [];
     let params = '';
 
@@ -74,6 +80,9 @@ const Shop = () => {
 
     if(search.length>0){
       params = new URLSearchParams(search)
+      setSearchParams(params)
+    }else{
+      setSearchParams()
     }
 
 
@@ -88,7 +97,6 @@ const Shop = () => {
     // }
 
 
-    console.log(params.toString())
     fetch(`${apiUrl}/get-products?${params}`, {
       method: 'GET',
       headers: {
@@ -98,7 +106,6 @@ const Shop = () => {
     }).then(res => res.json())
       .then(result => {
         if (result.status = 200) {
-          console.log(result.data)
           setProducts(result.data)
         }
       })
@@ -129,7 +136,7 @@ const Shop = () => {
                     categories && categories.map(category => {
                       return (
                         <li className='mb-2' key={`cat-${category.id}`}>
-                          <input onChange={handleCategory} type="checkbox" id={`cat-${category.id}`} value={category.id} />
+                          <input checked={searchParams.get('category') ? searchParams.get('category').includes(category.id):false} onChange={handleCategory} type="checkbox" id={`cat-${category.id}`} value={category.id} />
                           <label htmlFor={`cat-${category.id}`} className='ps-2'>{category.name}</label>
                         </li>
                       )
@@ -148,7 +155,7 @@ const Shop = () => {
                     brands && brands.map(brand => {
                       return (
                         <li className='mb-2' key={`cat-${brand.id}`}>
-                          <input onChange={handleBrand} type="checkbox" id={`cat-${brand.id}`} value={brand.id} />
+                          <input checked={searchParams.get('brand') ? searchParams.get('brand').includes(brand.id):false} onChange={handleBrand} type="checkbox" id={`cat-${brand.id}`} value={brand.id} />
                           <label htmlFor={`cat-${brand.id}`} className='ps-2'>{brand.name}</label>
                         </li>
                       )
