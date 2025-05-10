@@ -9,16 +9,24 @@ const Shop = () => {
   const [categories, setCategories] = useState([])
   const [brands, setBrands] = useState([])
   const [products, setProducts] = useState([])
-  const [catChecked, setCatChecked] = useState([])
+  const [catChecked, setCatChecked] = useState([]);
+  const [brandChecked, setBrandCatChecked] = useState([]);
 
 
   const handleCategory = (e) =>{
-    console.log(e) 
     let {checked,value} = e.target;
     if(checked){
       setCatChecked(pre=>[...pre,value]);
     }else{
       setCatChecked(catChecked.filter(id=>id!=value))
+    }
+  }
+  const handleBrand = (e) =>{
+    let {checked,value} = e.target;
+    if(checked){
+      setBrandCatChecked(pre=>[...pre,value]);
+    }else{
+      setBrandCatChecked(brandChecked.filter(id=>id!=value))
     }
   }
 
@@ -33,7 +41,6 @@ const Shop = () => {
       .then(result => {
         if (result.status = 200) {
           setCategories(result.data)
-          console.log(result)
         }
       })
   }
@@ -48,13 +55,12 @@ const Shop = () => {
       .then(result => {
         if (result.status = 200) {
           setBrands(result.data)
-          console.log(result)
         }
       })
   }
 
   const fetchProducts = async () => {
-    
+    console.log(brandChecked)
     let search = [];
     let params = '';
 
@@ -62,9 +68,25 @@ const Shop = () => {
       search.push(['category',catChecked])
     }
 
+    if(brandChecked.length>0){
+      search.push(['brand',brandChecked])
+    }
+
     if(search.length>0){
       params = new URLSearchParams(search)
     }
+
+
+    // let params = new URLSearchParams();
+
+    // if (catChecked.length > 0) {
+    //   catChecked.forEach(id => params.append('category', id));
+    // }
+
+    // if (brandChecked.length > 0) {
+    //   brandChecked.forEach(id => params.append('brand', id));
+    // }
+
 
     console.log(params.toString())
     fetch(`${apiUrl}/get-products?${params}`, {
@@ -76,8 +98,8 @@ const Shop = () => {
     }).then(res => res.json())
       .then(result => {
         if (result.status = 200) {
+          console.log(result.data)
           setProducts(result.data)
-          console.log(result)
         }
       })
   }
@@ -86,7 +108,7 @@ const Shop = () => {
     fetchCategories();
     fetchBrands();
     fetchProducts();
-  }, [catChecked])
+  }, [catChecked,brandChecked])
 
   return (
     <Layout>
@@ -126,7 +148,7 @@ const Shop = () => {
                     brands && brands.map(brand => {
                       return (
                         <li className='mb-2' key={`cat-${brand.id}`}>
-                          <input type="checkbox" id={`cat-${brand.id}`} value={brand.name} />
+                          <input onChange={handleBrand} type="checkbox" id={`cat-${brand.id}`} value={brand.id} />
                           <label htmlFor={`cat-${brand.id}`} className='ps-2'>{brand.name}</label>
                         </li>
                       )
@@ -142,7 +164,7 @@ const Shop = () => {
               {/* Product 1 */}
 
               {
-                products && products.map(product => {
+                products.length>0 && products.map(product => {
                   return (
                     <div className="col-md-4 col-6">
                       <div className="product card border-0">
