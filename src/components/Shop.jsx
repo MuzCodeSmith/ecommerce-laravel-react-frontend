@@ -1,9 +1,93 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from './common/Layout'
 import ProductImg1 from '../assets/images/Mens/two.jpg';
 import { Link } from 'react-router-dom';
+import { apiUrl } from './common/http';
 
 const Shop = () => {
+
+  const [categories, setCategories] = useState([])
+  const [brands, setBrands] = useState([])
+  const [products, setProducts] = useState([])
+  const [catChecked, setCatChecked] = useState([])
+
+
+  const handleCategory = (e) =>{
+    console.log(e) 
+    let {checked,value} = e.target;
+    if(checked){
+      setCatChecked(pre=>[...pre,value]);
+    }else{
+      setCatChecked(catChecked.filter(id=>id!=value))
+    }
+  }
+
+  const fetchCategories = async () => {
+    fetch(`${apiUrl}/get-categories`, {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+      }
+    }).then(res => res.json())
+      .then(result => {
+        if (result.status = 200) {
+          setCategories(result.data)
+          console.log(result)
+        }
+      })
+  }
+  const fetchBrands = async () => {
+    fetch(`${apiUrl}/get-brands`, {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+      }
+    }).then(res => res.json())
+      .then(result => {
+        if (result.status = 200) {
+          setBrands(result.data)
+          console.log(result)
+        }
+      })
+  }
+
+  const fetchProducts = async () => {
+    
+    let search = [];
+    let params = '';
+
+    if(catChecked.length>0){
+      search.push(['category',catChecked])
+    }
+
+    if(search.length>0){
+      params = new URLSearchParams(search)
+    }
+
+    console.log(params.toString())
+    fetch(`${apiUrl}/get-products?${params}`, {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+      }
+    }).then(res => res.json())
+      .then(result => {
+        if (result.status = 200) {
+          setProducts(result.data)
+          console.log(result)
+        }
+      })
+  }
+
+  useEffect(() => {
+    fetchCategories();
+    fetchBrands();
+    fetchProducts();
+  }, [catChecked])
+
   return (
     <Layout>
       <div className="container">
@@ -19,18 +103,17 @@ const Shop = () => {
               <div className="card-body p-4">
                 <h1 className='mb-3'>categories</h1>
                 <ul>
-                  <li className='mb-2'>
-                    <input type="checkbox" name="kids" id="kids" />
-                    <label htmlFor="kids" className='ps-2'>Kids</label>
-                  </li>
-                  <li className='mb-2'>
-                    <input type="checkbox" name="women" id="women" />
-                    <label htmlFor="women" className='ps-2' >Women</label>
-                  </li>
-                  <li className='mb-2'>
-                    <input type="checkbox" name="men" id="men" />
-                    <label htmlFor="men" className='ps-2'>Men</label>
-                  </li>
+                  {
+                    categories && categories.map(category => {
+                      return (
+                        <li className='mb-2' key={`cat-${category.id}`}>
+                          <input onChange={handleCategory} type="checkbox" id={`cat-${category.id}`} value={category.id} />
+                          <label htmlFor={`cat-${category.id}`} className='ps-2'>{category.name}</label>
+                        </li>
+                      )
+                    })
+                  }
+
                 </ul>
               </div>
 
@@ -39,22 +122,16 @@ const Shop = () => {
               <div className="card-body p-4 mb-3">
                 <h1 className='mb-3'>Brands</h1>
                 <ul>
-                  <li className='mb-2'>
-                    <input type="checkbox" name="kids" id="kids" />
-                    <label htmlFor="kids" className='ps-2'>Puma</label>
-                  </li>
-                  <li className='mb-2'>
-                    <input type="checkbox" name="women" id="women" />
-                    <label htmlFor="women" className='ps-2' >Killer</label>
-                  </li>
-                  <li className='mb-2'>
-                    <input type="checkbox" name="men" id="men" />
-                    <label htmlFor="men" className='ps-2'>Levis</label>
-                  </li>
-                  <li className='mb-2'>
-                    <input type="checkbox" name="men" id="men" />
-                    <label htmlFor="men" className='ps-2'>Flying Machine</label>
-                  </li>
+                  {
+                    brands && brands.map(brand => {
+                      return (
+                        <li className='mb-2' key={`cat-${brand.id}`}>
+                          <input type="checkbox" id={`cat-${brand.id}`} value={brand.name} />
+                          <label htmlFor={`cat-${brand.id}`} className='ps-2'>{brand.name}</label>
+                        </li>
+                      )
+                    })
+                  }
                 </ul>
               </div>
             </div>
@@ -63,98 +140,30 @@ const Shop = () => {
 
             <div className="row pb-5">
               {/* Product 1 */}
-              <div className="col-md-4 col-6">
-                <div className="product card border-0">
-                  <div className="card-img">
-                  <Link to="/product">
-                    <img src={ProductImg1} alt="" className='w-100' />
-                  </Link>
-                  </div>
-                  <div className="card-body pt-3">
-                    <Link to="/product">Red Check Shirt For Men</Link>
-                    <div className='price'>
-                      $50 <span className='text-decoration-line-through'>$80</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
-              {/* Product 1 */}
-              <div className="col-md-4 col-6">
-                <div className="product card border-0">
-                  <div className="card-img">
-                    <img src={ProductImg1} alt="" className='w-100' />
-                  </div>
-                  <div className="card-body pt-3">
-                    <a href="">Red Check Shirt For Men</a>
-                    <div className='price'>
-                      $50 <span className='text-decoration-line-through'>$80</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {
+                products && products.map(product => {
+                  return (
+                    <div className="col-md-4 col-6">
+                      <div className="product card border-0">
+                        <div className="card-img">
+                          {
+                            product.image_url !== "" ? <img src={product.image_url} alt="" />
+                              : <img src={'https://placehold.co/360x540/png'} alt="" />
+                          }
 
-              {/* Product 1 */}
-              <div className="col-md-4 col-6">
-                <div className="product card border-0">
-                  <div className="card-img">
-                    <img src={ProductImg1} alt="" className='w-100' />
-                  </div>
-                  <div className="card-body pt-3">
-                    <a href="">Red Check Shirt For Men</a>
-                    <div className='price'>
-                      $50 <span className='text-decoration-line-through'>$80</span>
+                        </div>
+                        <div className="card-body pt-3">
+                          <a href="">{product.title}</a>
+                          <div className='price'>
+                            ${product.price} <span className='text-decoration-line-through'>${product.compare_price}</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Product 1 */}
-              <div className="col-md-4 col-6">
-                <div className="product card border-0">
-                  <div className="card-img">
-                    <Link to="/product">
-                      <img src={ProductImg1} alt="" className='w-100' />
-                    </Link>
-                  </div>
-                  <div className="card-body pt-3">
-                    <Link to="/product">Red Check Shirt For Men</Link>
-                    <div className='price'>
-                      $50 <span className='text-decoration-line-through'>$80</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Product 1 */}
-              <div className="col-md-4 col-6">
-                <div className="product card border-0">
-                  <div className="card-img">
-                    <img src={ProductImg1} alt="" className='w-100' />
-                  </div>
-                  <div className="card-body pt-3">
-                    <a href="">Red Check Shirt For Men</a>
-                    <div className='price'>
-                      $50 <span className='text-decoration-line-through'>$80</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Product 1 */}
-              <div className="col-md-4 col-6">
-                <div className="product card border-0">
-                  <div className="card-img">
-                    <img src={ProductImg1} alt="" className='w-100' />
-                  </div>
-                  <div className="card-body pt-3">
-                    <a href="">Red Check Shirt For Men</a>
-                    <div className='price'>
-                      $50 <span className='text-decoration-line-through'>$80</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                  )
+                })
+              }
 
             </div>
           </div>
