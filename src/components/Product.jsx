@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Layout from './common/Layout'
 import { Link, useParams } from 'react-router-dom'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -11,16 +11,34 @@ import 'swiper/css/thumbs';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { Rating } from 'react-simple-star-rating'
+import { CartContext } from './context/Cart';
 
 // images
 import { apiUrl } from './common/http';
+import { toast } from 'react-toastify';
 
 const Product = () => {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [rating, setRating] = useState(4)
     const [product, setProduct] = useState([]);
     const [productImages, setProductImages] = useState([]);
+    const [productSizes, setProductSizes] = useState([]);
+    const [sizeSelected, setSizeSelected] = useState(null);
     const params = useParams();
+
+    const {addToCart} = useContext(CartContext)
+
+    const handleAddToCart = () =>{
+        if(productSizes.length>0){
+            if(!sizeSelected){
+                toast.error("please select the size")
+            }else{
+                addToCart(product,sizeSelected);
+            }
+        }else{
+            addToCart(product,null)
+        }
+    }
 
     const fetchProduct = async () => {
         fetch(`${apiUrl}/get-product/${params.id}`, {
@@ -32,9 +50,9 @@ const Product = () => {
         }).then(res => res.json())
             .then(result => {
                 if (result.status === 200) {
-                    console.log(result.data);
                     setProduct(result.data)
                     setProductImages(result.data.product_images)
+                    setProductSizes(result.data.product_sizes)
                 }
             })
     }
@@ -147,9 +165,9 @@ const Product = () => {
                             <strong>Select Sizes</strong>
                             <div className='sizes pt-2'>
                                 {
-                                    product.product_sizes && product.product_sizes.map(size => {
+                                    productSizes && productSizes.map(size => {
                                         return (
-                                            <button className='btn btn-size me-2'>{size.size.name}</button>
+                                            <button onClick={()=>setSizeSelected(size.size_id)} className='btn btn-size me-2'>{size.size.name}</button>
                                         )
                                     })
                                 }
@@ -157,7 +175,7 @@ const Product = () => {
                         </div>
 
                         <div className='add-to-cart my-4'>
-                            <button className='btn btn-primary text-uppercase'>Add to Cart</button>
+                            <button onClick={()=>handleAddToCart()} className='btn btn-primary text-uppercase'>Add to Cart</button>
                         </div>
 
                         <hr />
