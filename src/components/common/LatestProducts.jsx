@@ -4,6 +4,7 @@ import ProductImg2 from '../../assets/images/Mens/three.jpg';
 import ProductImg3 from '../../assets/images/Mens/six.jpg';
 import ProductImg4 from '../../assets/images/Mens/fivee.jpg';
 import { adminToken, apiUrl } from './http';
+import { Link } from 'react-router-dom';
 const LatestProducts = () => {
 
     const [products, setProducts] = useState([]);
@@ -44,11 +45,13 @@ const LatestProducts = () => {
                                 <div className="col-md-3 col-6">
                                     <div className="product card border-0">
                                         <div className="card-img">
-                                            {
-                                                product.image_url !== "" ? <img src={product.image_url} alt="" />
-                                                    : <img src={'https://placehold.co/360x540/png'} alt="" />
-                                            }
-                                            
+                                            <Link to={`/product/${product.id}`}>
+                                                {
+                                                    product.image_url !== "" ? <img src={product.image_url} alt="" />
+                                                        : <img src={'https://placehold.co/360x540/png'} alt="" />
+                                                }
+
+                                            </Link>
                                         </div>
                                         <div className="card-body pt-3">
                                             <a href="">{product.title}</a>

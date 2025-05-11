@@ -176,10 +176,12 @@ const Shop = () => {
                     <div key={`prod-${product.id}`} className="col-md-4 col-6">
                       <div className="product card border-0">
                         <div className="card-img">
+                          <Link to={`/product/${product.id}`}>
                           {
                             product.image_url !== "" ? <img src={product.image_url} alt="" />
                               : <img src={'https://placehold.co/360x540/png'} alt="" />
                           }
+                          </Link>
 
                         </div>
                         <div className="card-body pt-3">
