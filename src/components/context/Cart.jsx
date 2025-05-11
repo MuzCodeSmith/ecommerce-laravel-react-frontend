@@ -71,14 +71,26 @@ export const CartProvider = ({children}) =>{
         cardData.map(item=>{
             subTotal += Number(item.qty) * Number(item.price);;
         })
-        return subTotal;
+        return Math.round(subTotal);
     }
     const grandTotal = () =>{
         return  subTotal() + shipping();
     }
 
+    const updatedCartItem = (itemId,newQty)=>{
+        let updatedCart = [...cardData];
+        updatedCart = updatedCart.map(item=>(item.id==itemId)?{...item, qty:newQty}:item);
+        setCartdata(updatedCart);
+        localStorage.setItem('cart',JSON.stringify(updatedCart));
+    }
+
+    const deleteCartItem = (itemId) =>{
+        cardData.filter(item=>item.id != itemId);
+    }
+
+
     return(
-        <CartContext.Provider value={{addToCart,cardData,grandTotal,subTotal,shipping}} >
+        <CartContext.Provider value={{addToCart,cardData,grandTotal,subTotal,shipping,deleteCartItem,updatedCartItem}} >
             {children}
         </CartContext.Provider>
     )

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import Layout from './common/Layout'
 import ProductImg from '../assets/images/Mens/two.jpg';
 import { Link } from 'react-router-dom';
@@ -6,7 +6,15 @@ import { CartContext } from './context/Cart';
 
 
 const Cart = () => {
-    const { cardData,grandTotal,subTotal,shipping } = useContext(CartContext)
+    const { cardData,grandTotal,subTotal,shipping,updatedCartItem,deleteCartItem } = useContext(CartContext)
+    const [qty,setQty]= useState({});
+
+    const handleQty = (e, itemId) =>{
+        const newQty = e.target.value;
+        setQty(pre=>({...pre,[itemId]:newQty}))
+        updatedCartItem(itemId,newQty)
+    }
+
     return (
         <Layout>
             <div className="container pb-3">
@@ -43,7 +51,11 @@ const Cart = () => {
                                                     </div>
                                                 </td>
                                                 <td valign='middle'>
-                                                    <input style={{ width: '100px' }} type="number" value={cartItem.qty} className='form-control' />
+                                                    <input style={{ width: '100px' }}
+                                                    min={1}
+                                                    max={10}
+                                                    onChange={(e)=>handleQty(e,cartItem.id)}
+                                                    type="number" value={qty[cartItem.id]||cartItem.qty} className='form-control' />
                                                 </td>
                                                 <td valign='middle'>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-trash3" viewBox="0 0 16 16">
