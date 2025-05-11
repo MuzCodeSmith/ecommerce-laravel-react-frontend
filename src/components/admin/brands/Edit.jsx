@@ -29,7 +29,6 @@ const Edit = () => {
                 }
               }).then(response => response.json())
                 .then(result => {
-                  console.log(result)
                   if (result.status == 200) {
                     setBrand(result.data)
                     reset({

@@ -20,7 +20,6 @@ const LatestProducts = () => {
         }).then(res => res.json())
             .then(result => {
                 if (result.status == 200) {
-                    console.log(result)
                     setProducts(result.data);
                 } else {
                     console.log("something went wrong")

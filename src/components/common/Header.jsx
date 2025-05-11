@@ -23,8 +23,6 @@ const Header = props => {
       .then(result => {
         if (result.status == 200) {
           setCategories(result.data)
-          console.log(result.status)
-
         } else {
           console.log("something went wrong")
         }
