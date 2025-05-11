@@ -85,12 +85,21 @@ export const CartProvider = ({children}) =>{
     }
 
     const deleteCartItem = (itemId) =>{
-        cardData.filter(item=>item.id != itemId);
+        const newCartData= cardData.filter(item=>item.id != itemId);
+        setCartdata(newCartData);
+        localStorage.setItem('cart',JSON.stringify(newCartData));
     }
 
+    const getQty = () =>{
+        let qty = 0;
+        cardData.map(item=>{
+            qty += parseInt(item.qty)
+        });
+        return qty;
+    }
 
     return(
-        <CartContext.Provider value={{addToCart,cardData,grandTotal,subTotal,shipping,deleteCartItem,updatedCartItem}} >
+        <CartContext.Provider value={{addToCart,cardData,grandTotal,subTotal,shipping,deleteCartItem,getQty,updatedCartItem}} >
             {children}
         </CartContext.Provider>
     )
