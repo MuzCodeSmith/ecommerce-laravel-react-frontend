@@ -19,6 +19,43 @@ export const CartProvider = ({children}) =>{
                 qty:1,
                 image_url:product.image_url,
             })
+        }else{
+            if(size !=null){
+                const isProducExist = updatedCart.find(item=>item.product_id == product.id && item.size == size)
+
+                if(isProducExist){
+                    updatedCart= updatedCart.map(item=>
+                        (item.product_id == product.id && item.size == size) ? {...item,qty:item.qty+1} : item
+                        )
+                }else{
+                    updatedCart.push({
+                        id:`${product.id}-${Math.floor(Math.random()*1000000)}`,
+                        product_id:product.id,
+                        size:size,
+                        title:product.title,
+                        price:product.price,
+                        qty:1,
+                        image_url:product.image_url,
+                    })
+                }
+            }else{
+                const isProducExist = updatedCart.find(item=>item.product_id == product.id)
+
+                if(isProducExist){
+                    updatedCart= updatedCart.map(item=>
+                        (item.product_id == product.id) ? {...item,qty:item.qty+1} : item)
+                }else{
+                    updatedCart.push({
+                        id:`${product.id}-${Math.floor(Math.random()*1000000)}`,
+                        product_id:product.id,
+                        size:size,
+                        title:product.title,
+                        price:product.price,
+                        qty:1,
+                        image_url:product.image_url,
+                    })
+                }
+            }
         }
 
         setCartdata(updatedCart);

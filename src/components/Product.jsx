@@ -34,9 +34,13 @@ const Product = () => {
                 toast.error("please select the size")
             }else{
                 addToCart(product,sizeSelected);
+                toast.success("product successfully added to cart")
+
             }
         }else{
             addToCart(product,null)
+            toast.success("product successfully added to cart")
+
         }
     }
 
