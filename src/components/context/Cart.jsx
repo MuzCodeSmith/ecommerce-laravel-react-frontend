@@ -58,12 +58,27 @@ export const CartProvider = ({children}) =>{
             }
         }
 
+
         setCartdata(updatedCart);
         localStorage.setItem('cart',JSON.stringify(updatedCart));
     }
 
+    const shipping = () =>{
+        return 0;
+    }
+    const subTotal = () =>{
+        let subTotal = 0;
+        cardData.map(item=>{
+            subTotal += Number(item.qty) * Number(item.price);;
+        })
+        return subTotal;
+    }
+    const grandTotal = () =>{
+        return  subTotal() + shipping();
+    }
+
     return(
-        <CartContext.Provider value={{addToCart}} >
+        <CartContext.Provider value={{addToCart,cardData,grandTotal,subTotal,shipping}} >
             {children}
         </CartContext.Provider>
     )
