@@ -9,6 +9,7 @@ import Login from './components/admin/login'
 import { ToastContainer, toast } from 'react-toastify';
 import Dashboard from './components/admin/Dashboard';
 import {AdminRequireAuth } from './components/admin/AdminRequireAuth';
+import RequireAuth from './components/RequireAuth'
 import {default as ShowCategory } from './components/admin/category/Show';
 import {default as CreateCategory} from './components/admin/category/Create';
 import {default as EditCategory} from './components/admin/category/Edit'
@@ -20,6 +21,7 @@ import {default as EditProdut} from './components/admin/products/Edit';
 import {default as CreateProdut} from './components/admin/products/Create';
 import Register from './components/Register'
 import {default as UserLogin} from './components/Login'
+import Profile from './components/Profile'
 
 function App() {
 
@@ -35,6 +37,13 @@ function App() {
           <Route path='/account/register' element={<Register/>} />
           <Route path='/account/login' element={<UserLogin/>} />
           <Route path='/admin/login' element={<Login/>} />
+
+          <Route path='/account' element={
+            <RequireAuth>
+              <Profile/>
+            </RequireAuth>
+          } />
+
           <Route path='/admin/dashboard' element={
             <AdminRequireAuth>
               <Dashboard/>
