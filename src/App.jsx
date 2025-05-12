@@ -32,8 +32,6 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/shop' element={<Shop />} />
           <Route path='/product/:id' element={<Product/>} />
-          <Route path='/cart' element={<Cart/>} />
-          <Route path='/checkout' element={<Checkout/>} />
           <Route path='/account/register' element={<Register/>} />
           <Route path='/account/login' element={<UserLogin/>} />
           <Route path='/admin/login' element={<Login/>} />
@@ -41,6 +39,16 @@ function App() {
           <Route path='/account' element={
             <RequireAuth>
               <Profile/>
+            </RequireAuth>
+          } />
+          <Route path='/checkout' element={
+            <RequireAuth>
+              <Checkout/>
+            </RequireAuth>
+          } />
+          <Route path='/cart' element={
+            <RequireAuth>
+              <Cart/>
             </RequireAuth>
           } />
 
