@@ -96,7 +96,7 @@ const Cart = () => {
                                 <div>${grandTotal()}</div>
                             </div>
                             <div className="d-flex justify-content-end  py-3">
-                                <button className="btn btn-primary">Procceed to checkout</button>
+                                <Link className="btn btn-primary" to='/checkout' >Procceed to checkout</Link>
                             </div>
                         </div>
                     </div>
