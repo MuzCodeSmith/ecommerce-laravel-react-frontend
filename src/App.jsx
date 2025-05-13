@@ -22,6 +22,7 @@ import {default as CreateProdut} from './components/admin/products/Create';
 import Register from './components/Register'
 import {default as UserLogin} from './components/Login'
 import Profile from './components/Profile'
+import Confirmation from './components/Confirmation'
 
 function App() {
 
@@ -49,6 +50,11 @@ function App() {
           <Route path='/cart' element={
             <RequireAuth>
               <Cart/>
+            </RequireAuth>
+          } />
+          <Route path='/order/confirmation/:id' element={
+            <RequireAuth>
+              <Confirmation/>
             </RequireAuth>
           } />
 
