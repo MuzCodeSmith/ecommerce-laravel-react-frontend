@@ -3,6 +3,7 @@ import Layout from './common/Layout'
 import { Link } from 'react-router-dom'
 import { CartContext } from './context/Cart';
 import { useForm } from 'react-hook-form';
+import { userToken, apiUrl } from './common/http';
 
 
 
@@ -23,9 +24,34 @@ const Checkout = () => {
         setPaymentMethod(e.target.value)
     }
 
+    const processOrder = (data) => {
+        if(paymenMethod == 'cod'){
+            saveOrder(data, 'not paid')
+        }
+    }
 
-    const onProcessOrder = (data) => {
-        console.log(data)
+    const saveOrder = (formdata,paymentStatus) =>{
+        let newFormdata = {
+            ...formdata,
+            grand_total:grandTotal(),
+            sub_total:subTotal(),
+            shipping:shipping(),
+            discount:0,
+            payment_status:paymentStatus,
+            status:'pending',
+            cart:cardData
+        }
+
+        fetch(`${apiUrl}/save-order`,{
+            method:'POST',
+            headers:{
+                'Content-type':'application/json',
+                'Accept':'application/json',
+                'Authorization':`Bearer ${userToken()}`
+            },
+            body:JSON.stringify(newFormdata)
+        }).then(res => res.json())
+        .then(result => console.log(result))
     }
     return (
         <Layout>
@@ -40,7 +66,7 @@ const Checkout = () => {
                         </nav>
                     </div>
                 </div>
-                <form action="" onSubmit={handleSubmit(onProcessOrder)} >
+                <form action="" onSubmit={handleSubmit(processOrder)} >
                     <div className="row">
                         <div className="col-md-7">
                             <h3 className='border-bottom pb-3'><strong>Billing Details</strong></h3>
@@ -180,15 +206,15 @@ const Checkout = () => {
                                 <div className="col-md-12">
                                     <div className="d-flex justify-content-between border-bottom pb-2">
                                         <div><strong>Subtotal</strong></div>
-                                        <div>$20</div>
+                                        <div>${subTotal()}</div>
                                     </div>
                                     <div className="d-flex justify-content-between border-bottom py-2">
                                         <div><strong>Shipping</strong></div>
-                                        <div>$5</div>
+                                        <div>${shipping()}</div>
                                     </div>
                                     <div className="d-flex justify-content-between border-bottom py-2">
                                         <div><strong>Grand Total</strong></div>
-                                        <div>$25</div>
+                                        <div>${grandTotal()}</div>
                                     </div>
                                     <div className="d-flex justify-content-end  py-3">
                                         <button className="btn btn-primary">Procceed to checkout</button>
