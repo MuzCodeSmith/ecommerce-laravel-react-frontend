@@ -1,9 +1,10 @@
 import React, { useContext, useState } from 'react'
 import Layout from './common/Layout'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { CartContext } from './context/Cart';
 import { useForm } from 'react-hook-form';
 import { userToken, apiUrl } from './common/http';
+import { toast } from 'react-toastify';
 
 
 
@@ -11,6 +12,7 @@ const Checkout = () => {
 
     const { cardData, grandTotal, subTotal, shipping, updatedCartItem, deleteCartItem } = useContext(CartContext)
     const [paymenMethod, setPaymentMethod] = useState('cod');
+    const navigate = useNavigate();
 
     const {
         register,
@@ -51,7 +53,15 @@ const Checkout = () => {
             },
             body:JSON.stringify(newFormdata)
         }).then(res => res.json())
-        .then(result => console.log(result))
+        .then(result =>{
+            if(result.status){
+                localStorage.removeItem('cart')
+                navigate(`/order/confirmation/${result.id}`);
+                toast.success(result.message);
+            }else{
+                toast.error(result.message);
+            }
+        })
     }
     return (
         <Layout>
