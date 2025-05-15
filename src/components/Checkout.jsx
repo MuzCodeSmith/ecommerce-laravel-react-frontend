@@ -203,6 +203,7 @@ const Checkout = () => {
                                                                     cartItem.size && <button className="btn btn-size">{cartItem.size}</button>
                                                                 }
                                                             </div>
+                                                            <div className="ps-5">x {cartItem.qty}</div>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -225,9 +226,6 @@ const Checkout = () => {
                                     <div className="d-flex justify-content-between border-bottom py-2">
                                         <div><strong>Grand Total</strong></div>
                                         <div>${grandTotal()}</div>
-                                    </div>
-                                    <div className="d-flex justify-content-end  py-3">
-                                        <button className="btn btn-primary">Procceed to checkout</button>
                                     </div>
                                 </div>
                             </div>
