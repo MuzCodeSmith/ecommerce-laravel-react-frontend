@@ -23,6 +23,7 @@ import Register from './components/Register'
 import {default as UserLogin} from './components/Login'
 import Profile from './components/Profile'
 import Confirmation from './components/Confirmation'
+import ShowOrders from './components/admin/orders/ShowOrders'
 
 function App() {
 
@@ -107,6 +108,11 @@ function App() {
           <Route path='/admin/products/edit/:id' element={
             <AdminRequireAuth>
               <EditProdut/>
+            </AdminRequireAuth>
+          } ></Route>
+          <Route path='/admin/orders'element={
+            <AdminRequireAuth>
+              <ShowOrders/>r
             </AdminRequireAuth>
           } ></Route>
         </Routes>
