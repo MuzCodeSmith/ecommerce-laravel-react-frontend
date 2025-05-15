@@ -2,7 +2,7 @@ import React from 'react'
 import Layout from './Layout'
 import { Link } from 'react-router-dom'
 import Sidebar from './Sidebar'
-const DashboardLayout = ({pagetitle,btnLabel,btnLink="", children}) => {
+const DashboardLayout = ({pagetitle,btnLabel,btnLink="",innerShadow=true, children }) => {
   return (
   <Layout>
     <div className="container">
@@ -15,7 +15,7 @@ const DashboardLayout = ({pagetitle,btnLabel,btnLink="", children}) => {
           <Sidebar />
         </div>
         <div className="col-md-9">
-          <div className="card shadow mb-5">
+          <div className={innerShadow ? "card shadow mb-5" :"mb-5"}>
             <div className="card-body p-4">
                 {children}
             </div>

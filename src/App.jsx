@@ -24,6 +24,7 @@ import {default as UserLogin} from './components/Login'
 import Profile from './components/Profile'
 import Confirmation from './components/Confirmation'
 import ShowOrders from './components/admin/orders/ShowOrders'
+import { OrderDetails } from './components/admin/orders/OrderDetails'
 
 function App() {
 
@@ -113,6 +114,11 @@ function App() {
           <Route path='/admin/orders'element={
             <AdminRequireAuth>
               <ShowOrders/>r
+            </AdminRequireAuth>
+          } ></Route>
+          <Route path='/admin/orders/:id'element={
+            <AdminRequireAuth>
+              <OrderDetails/>r
             </AdminRequireAuth>
           } ></Route>
         </Routes>

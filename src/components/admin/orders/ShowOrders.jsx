@@ -3,6 +3,7 @@ import Layout from '../../common/Layout'
 import Dashboard from '../Dashboard'
 import DashboardLayout from '../../common/DashboardLayout'
 import { adminToken, apiUrl, userToken } from '../../common/http'
+import { Link } from 'react-router-dom'
 
 const ShowOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -61,7 +62,8 @@ const ShowOrders = () => {
               orders && orders.map(order => {
                 return (
                   <tr>
-                    <td>{order.id}</td>
+                    <td>
+                      <Link to={`/admin/orders/${order.id}`}>{order.id}</Link></td>
                     <td>{order.name}</td>
                     <td>{order.email}</td>
                     <td>${order.subtotal}</td>
