@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import Layout from './common/Layout'
-import ProductImg1 from '../assets/images/Mens/two.jpg';
 import { Link, useSearchParams } from 'react-router-dom';
 import { apiUrl } from './common/http';
 

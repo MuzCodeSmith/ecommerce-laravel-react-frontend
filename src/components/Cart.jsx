@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react'
 import Layout from './common/Layout'
-import ProductImg from '../assets/images/Mens/two.jpg';
 import { Link } from 'react-router-dom';
 import { CartContext } from './context/Cart';
 

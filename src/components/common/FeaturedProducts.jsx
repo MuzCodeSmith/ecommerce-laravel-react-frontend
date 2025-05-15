@@ -1,8 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import ProductImg1 from '../../assets/images/Mens/six.jpg';
-import ProductImg2 from '../../assets/images/Mens/seven.jpg';
-import ProductImg3 from '../../assets/images/Mens/six.jpg';
-import ProductImg4 from '../../assets/images/Mens/fivee.jpg';
 import { adminToken, apiUrl } from './http';
 import { Link, Links } from 'react-router-dom';
 const FeaturedProducts = () => {
