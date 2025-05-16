@@ -15,7 +15,7 @@ const DashboardLayout = ({pagetitle,btnLabel,btnLink="",innerShadow=true, childr
           <Sidebar />
         </div>
         <div className="col-md-9">
-          <div className={innerShadow ? "card shadow mb-5" :"mb-5"}>
+          <div className={innerShadow ? "card shadow mb-5" :""}>
             <div className="card-body p-4">
                 {children}
             </div>
