@@ -76,7 +76,7 @@ const ShowOrders = () => {
                       order.status == 'pending' ?
                         <span className="badge text-bg-warning">Pending</span>
                         : order.status == 'shipped' ?
-                          <span className="badge text-bg-warning">Shipped</span>
+                          <span className="badge text-bg-secondary">Shipped</span>
                           : order.status == 'delivered' ?
                             <span className="badge text-bg-success">Delivered</span>
                             : order.status == 'cancelled' ? <span className="badge text-bg-danger">Cancelled</span> : ''

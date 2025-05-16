@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import DashboardLayout from '../../common/DashboardLayout'
 import { adminToken, apiUrl } from '../../common/http';
 import { useParams } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 export const OrderDetails = () => {
 
@@ -9,6 +11,14 @@ export const OrderDetails = () => {
     const [loading, setLoading] = useState(true);
     const [items, setItems] = useState([]);
     const params = useParams()
+
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm()
+
 
     const fetchOrder = async () => {
         fetch(`${apiUrl}/orders/${params.id}`, {
@@ -25,6 +35,25 @@ export const OrderDetails = () => {
                     setLoading(false)
                     setOrder(result.data)
                     setItems(result.data.items)
+                }
+            })
+    }
+
+    const onSubmitStatus = (data) => {
+        fetch(`${apiUrl}/update-order/${params.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${adminToken()}`
+            },
+            body:JSON.stringify(data),
+        }).then(res => res.json())
+            .then(result => {
+                console.log(result)
+                if (result.status === 200) {
+                   toast.success(result.message);
+                   fetchOrder()
                 }
             })
     }
@@ -142,8 +171,46 @@ export const OrderDetails = () => {
                         </div>
                         <div className="col-md-3">
                             <div className="card shadow">
-                                <div className="card-body">
-
+                                <div className="card-body p-4">
+                                    <form onSubmit={handleSubmit(onSubmitStatus)} action="">
+                                        <div className="mb-3">
+                                            <label className='form-label' htmlFor="status">Status</label>
+                                            <select
+                                                {
+                                                ...register('status', {
+                                                    required: "The status field is required",
+                                                })
+                                                }
+                                                className={`form-select ${errors.status && 'is-invalid'}`} id="status">
+                                                <option value="">---select status---</option>
+                                                <option value="pending">Pending</option>
+                                                <option value="shipped">Shipped</option>
+                                                <option value="delivered">Delivered</option>
+                                                <option value="cancelled">Cancelled</option>
+                                            </select>
+                                            {
+                                                errors.status && <p className='invalid-feedback'>{errors.status?.message}</p>
+                                            }
+                                        </div>
+                                        <div className="mb-3">
+                                            <label className='form-label' htmlFor="payment_status">Payment Status</label>
+                                            <select
+                                                {
+                                                ...register('payment_status', {
+                                                    required: "The Payment Status field is required",
+                                                })
+                                                }
+                                                className={`form-select ${errors.payment_status && 'is-invalid'}`} id="payment_status">
+                                                <option value="">---select payment status---</option>
+                                                <option value="paid">Paid</option>
+                                                <option value="not paid">Not Paid</option>
+                                            </select>
+                                            {
+                                                errors.payment_status && <p className='invalid-feedback'>{errors.payment_status?.message}</p>
+                                            }
+                                        </div>
+                                        <button className='btn btn-primary'>Update</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
