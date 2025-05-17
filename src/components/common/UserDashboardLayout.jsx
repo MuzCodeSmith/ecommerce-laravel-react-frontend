@@ -10,7 +10,9 @@ const UserDashboardLayout = ({pagetitle,btnLabel,btnLink="", children}) => {
       <div className="row">
         <div className="d-flex justify-content-between mt-5 pb-3">
           <h4 className='h4 pb-0 mb-0'>{pagetitle}</h4>
-          <Link className='btn btn-primary' to={btnLink} >{btnLabel}</Link>
+          {
+            btnLabel && <Link className='btn btn-primary' to={btnLink} >{btnLabel}</Link>
+          }
         </div>
         <div className="col-md-3">
           <UserSidebar/>
