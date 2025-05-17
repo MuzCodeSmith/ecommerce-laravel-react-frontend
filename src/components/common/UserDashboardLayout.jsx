@@ -3,7 +3,7 @@ import Layout from './Layout'
 import UserSidebar from './UserSidebar'
 import { Link } from 'react-router-dom'
 
-const UserDashboardLayout = ({pagetitle,btnLabel,btnLink="", children}) => {
+const UserDashboardLayout = ({pagetitle,btnLabel,btnLink="", children, innerShadow=true}) => {
   return (
     <Layout>
     <div className="container">
@@ -18,8 +18,8 @@ const UserDashboardLayout = ({pagetitle,btnLabel,btnLink="", children}) => {
           <UserSidebar/>
         </div>
         <div className="col-md-9">
-          <div className="card shadow mb-5">
-            <div className="card-body p-4">
+          <div  className={innerShadow ? "card shadow mb-5" :""}>
+            <div className={innerShadow?"card-body p-4":"card-body"}>
                 {children}
             </div>
           </div>
