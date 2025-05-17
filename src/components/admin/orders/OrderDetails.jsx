@@ -16,6 +16,7 @@ export const OrderDetails = () => {
         register,
         handleSubmit,
         watch,
+        reset,
         formState: { errors },
     } = useForm()
 
@@ -33,8 +34,12 @@ export const OrderDetails = () => {
                 console.log(result)
                 if (result.status === 200) {
                     setLoading(false)
-                    setOrder(result.data)
-                    setItems(result.data.items)
+                    setOrder(result.data);
+                    setItems(result.data.items);
+                    reset({
+                        status:result.data.status,
+                        payment_status:result.data.payment_status,
+                    })
                 }
             })
     }
@@ -182,7 +187,6 @@ export const OrderDetails = () => {
                                                 })
                                                 }
                                                 className={`form-select ${errors.status && 'is-invalid'}`} id="status">
-                                                <option value="">---select status---</option>
                                                 <option value="pending">Pending</option>
                                                 <option value="shipped">Shipped</option>
                                                 <option value="delivered">Delivered</option>
@@ -201,7 +205,6 @@ export const OrderDetails = () => {
                                                 })
                                                 }
                                                 className={`form-select ${errors.payment_status && 'is-invalid'}`} id="payment_status">
-                                                <option value="">---select payment status---</option>
                                                 <option value="paid">Paid</option>
                                                 <option value="not paid">Not Paid</option>
                                             </select>
