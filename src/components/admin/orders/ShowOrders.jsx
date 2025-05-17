@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Layout from '../../common/Layout'
-import Dashboard from '../Dashboard'
 import DashboardLayout from '../../common/DashboardLayout'
 import { adminToken, apiUrl, userToken } from '../../common/http'
 import { Link } from 'react-router-dom'
@@ -63,7 +61,7 @@ const ShowOrders = () => {
                 return (
                   <tr>
                     <td>
-                      <Link to={`/admin/orders/${order.id}`}>{order.id}</Link></td>
+                      <Link className='fw-bold text-primary' to={`/admin/orders/${order.id}`}>{order.id}</Link></td>
                     <td>{order.name}</td>
                     <td>{order.email}</td>
                     <td>${order.subtotal}</td>
