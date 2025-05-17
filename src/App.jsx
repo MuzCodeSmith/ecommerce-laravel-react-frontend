@@ -26,6 +26,7 @@ import Confirmation from './components/Confirmation'
 import ShowOrders from './components/admin/orders/ShowOrders'
 import { OrderDetails } from './components/admin/orders/OrderDetails'
 import MyOrders from './components/front/MyOrders'
+import {default as UserOrderDetails} from './components/front/OrderDetails'
 
 function App() {
 
@@ -65,7 +66,12 @@ function App() {
               <Confirmation/>
             </RequireAuth>
           } />
-
+          <Route path='/account/orders/details/:id'element={
+            <RequireAuth>
+              <UserOrderDetails/>r
+            </RequireAuth>
+          } ></Route>
+          
           <Route path='/admin/dashboard' element={
             <AdminRequireAuth>
               <Dashboard/>
