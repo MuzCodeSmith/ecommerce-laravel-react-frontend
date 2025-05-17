@@ -34,7 +34,15 @@ const MyOrders = () => {
 
   return (
     <UserDashboardLayout pagetitle='My Orders' btnLabel='Back' btnLink='/orders'>
-    {
+      {
+        loading === true &&
+        <div className="text-center py-5">
+          <div className="spinner-border" role='status'>
+            <span className="visaully-hidden"></span>
+          </div>
+        </div>
+      }
+      {
         loading == false && orders &&
         <table className="table table-stripped">
           <thead>
@@ -49,12 +57,13 @@ const MyOrders = () => {
             </tr>
           </thead>
           <tbody>
+
             {
               orders && orders.map(order => {
                 return (
-                  <tr>
+                  <tr key={order.id}>
                     <td>
-                      <Link className='fw-bold text-primary' to={`/admin/orders/${order.id}`}>{order.id}</Link></td>
+                      <Link className='fw-bold text-primary' to={`account/orders/details/${order.id}`}>{order.id}</Link></td>
                     <td>{order.name}</td>
                     <td>{order.email}</td>
                     <td>${order.subtotal}</td>
@@ -76,8 +85,16 @@ const MyOrders = () => {
                 )
               })
             }
+
           </tbody>
         </table>
+      }
+
+      {
+        loading === false && orders.length === 0 &&
+        <div className="row">
+          <h1 className="text-center fw-bold text-muted">Order Not Found!</h1>
+        </div>
       }
     </UserDashboardLayout>
   )
