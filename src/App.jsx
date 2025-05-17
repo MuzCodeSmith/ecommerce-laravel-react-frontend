@@ -25,6 +25,7 @@ import Profile from './components/Profile'
 import Confirmation from './components/Confirmation'
 import ShowOrders from './components/admin/orders/ShowOrders'
 import { OrderDetails } from './components/admin/orders/OrderDetails'
+import MyOrders from './components/front/MyOrders'
 
 function App() {
 
@@ -42,6 +43,11 @@ function App() {
           <Route path='/account' element={
             <RequireAuth>
               <Profile/>
+            </RequireAuth>
+          } />
+          <Route path='/account/orders' element={
+            <RequireAuth>
+              <MyOrders/>
             </RequireAuth>
           } />
           <Route path='/checkout' element={
