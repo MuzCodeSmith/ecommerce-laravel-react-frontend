@@ -33,7 +33,7 @@ const MyOrders = () => {
   }, [])
 
   return (
-    <UserDashboardLayout pagetitle='My Orders' btnLabel='Back' btnLink='/orders'>
+    <UserDashboardLayout pagetitle='My Orders'>
       {
         loading === true &&
         <div className="text-center py-5">
@@ -63,7 +63,7 @@ const MyOrders = () => {
                 return (
                   <tr key={order.id}>
                     <td>
-                      <Link className='fw-bold text-primary' to={`account/orders/details/${order.id}`}>{order.id}</Link></td>
+                      <Link className='fw-bold text-primary' to={`/account/orders/details/${order.id}`}>{order.id}</Link></td>
                     <td>{order.name}</td>
                     <td>{order.email}</td>
                     <td>${order.subtotal}</td>
