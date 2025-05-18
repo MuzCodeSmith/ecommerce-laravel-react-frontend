@@ -27,6 +27,7 @@ import ShowOrders from './components/admin/orders/ShowOrders'
 import { OrderDetails } from './components/admin/orders/OrderDetails'
 import MyOrders from './components/front/MyOrders'
 import {default as UserOrderDetails} from './components/front/OrderDetails'
+import { Shipping } from './components/admin/shipping/Shipping'
 
 function App() {
 
@@ -71,7 +72,6 @@ function App() {
               <UserOrderDetails/>r
             </RequireAuth>
           } ></Route>
-          
           <Route path='/admin/dashboard' element={
             <AdminRequireAuth>
               <Dashboard/>
@@ -116,6 +116,11 @@ function App() {
           <Route path='/admin/products/create' element={
             <AdminRequireAuth>
               <CreateProdut/>
+            </AdminRequireAuth>
+          } ></Route>
+          <Route path='/admin/shipping' element={
+            <AdminRequireAuth>
+              <Shipping/>
             </AdminRequireAuth>
           } ></Route>
           <Route path='/admin/products/edit/:id' element={
